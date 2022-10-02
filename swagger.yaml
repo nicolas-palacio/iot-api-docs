@@ -1,456 +1,498 @@
 openapi: 3.0.1
 info:
-  title: OpenAPI definition
-  version: v0
+  title: Módulo IOT - API
+  version: 1.0.0
 servers:
-  - url: http://localhost:8080
-    description: Generated server url
+- url: http://localhost:8080
+  description: Generated server url
 paths:
   /api/sensores:
     get:
       tags:
-        - sensor-controller
+      - Sensores
       summary: Devuelve una lista con todos los sensores.
       operationId: getSensores
       responses:
         "500":
           description: Internal Server Error
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "403":
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "401":
-          description: Unauthorized
-        "404":
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
         "409":
           description: Conflict
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
         "200":
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Sensor"
+                  $ref: '#/components/schemas/Sensor'
     post:
       tags:
-        - sensor-controller
+      - Sensores
       summary: Inserta un nuevo sensor.
       operationId: postSensor
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/SensorContext"
+              $ref: '#/components/schemas/SensorContext'
         required: true
       responses:
         "500":
           description: Internal Server Error
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "403":
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "401":
-          description: Unauthorized
-        "404":
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
         "409":
           description: Conflict
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
         "200":
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/Sensor"
+                $ref: '#/components/schemas/Sensor'
   /api/areas:
     get:
       tags:
-        - area-controller
+      - Areas
       summary: Devuelve una lista con todas las areas de la escuela.
       operationId: getAreas
       responses:
         "500":
           description: Internal Server Error
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "403":
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "401":
-          description: Unauthorized
-        "404":
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
         "409":
           description: Conflict
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
         "200":
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Area"
+                  $ref: '#/components/schemas/Area'
     post:
       tags:
-        - area-controller
+      - Areas
       summary: Inserta una nueva area.
       operationId: postArea
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Area"
+              $ref: '#/components/schemas/Area'
         required: true
       responses:
         "500":
           description: Internal Server Error
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "403":
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "401":
-          description: Unauthorized
-        "404":
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
         "409":
           description: Conflict
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
         "200":
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/Area"
-  /api/sensores/tipos:
+                $ref: '#/components/schemas/Area'
+  /api/sensores/tipos/{tipo}:
     get:
       tags:
-        - sensor-controller
+      - Sensores
       summary: Devuelve una lista con todos los sensores segun el tipo.
       operationId: getSensorPorTipo
       parameters:
-        - name: tipo
-          in: query
-          required: true
-          schema:
-            type: string
+      - name: tipo
+        in: path
+        required: true
+        schema:
+          type: string
       responses:
         "500":
           description: Internal Server Error
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "403":
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "401":
-          description: Unauthorized
-        "404":
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
         "409":
           description: Conflict
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "200":
-          description: OK
-          content:
-            "*/*":
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Sensor"
-    delete:
-      tags:
-        - sensor-controller
-      summary: Elimina los sensores segun el tipo.
-      operationId: deleteSensorPorTipo
-      parameters:
-        - name: tipo
-          in: query
-          required: true
-          schema:
-            type: string
-      responses:
-        "500":
-          description: Internal Server Error
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "403":
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "401":
-          description: Unauthorized
+                $ref: '#/components/schemas/ErrorMessage'
         "404":
           description: Not Found
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "409":
-          description: Conflict
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
         "200":
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Sensor"
-  /api/sensores/ids:
+                  $ref: '#/components/schemas/Sensor'
+  /api/sensores/ids/{id}:
     get:
       tags:
-        - sensor-controller
+      - Sensores
       summary: Devuelve el sensor segun el ID indicado.
       operationId: getSensor
       parameters:
-        - name: id
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
         "500":
           description: Internal Server Error
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "403":
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "401":
-          description: Unauthorized
-        "404":
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
         "409":
           description: Conflict
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
         "200":
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/Sensor"
+                $ref: '#/components/schemas/Sensor'
     delete:
       tags:
-        - sensor-controller
+      - Sensores
       summary: Elimina el sensor con el ID indicado.
       operationId: deleteSensor
       parameters:
-        - name: id
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
         "500":
           description: Internal Server Error
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "403":
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "401":
-          description: Unauthorized
-        "404":
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
         "409":
           description: Conflict
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
         "200":
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/Sensor"
-  /api/areas/ids:
+                $ref: '#/components/schemas/Sensor'
+  /api/areas/puertas-abiertas:
     get:
       tags:
-        - area-controller
+      - Areas
+      summary: Devuelve una lista de las areas que tengan su puerta abierta.
+      operationId: getAreaPuertasAbiertas
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: Conflict
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Area'
+  /api/areas/ids/{id}:
+    get:
+      tags:
+      - Areas
       summary: "Devuelve el area, junto con sus sensores, segun el ID indicado."
       operationId: getArea
       parameters:
-        - name: id
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
         "500":
           description: Internal Server Error
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "403":
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "401":
-          description: Unauthorized
-        "404":
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
         "409":
           description: Conflict
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
         "200":
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/Area"
+                $ref: '#/components/schemas/Area'
     delete:
       tags:
-        - area-controller
+      - Areas
       summary: Elimina el area con el ID indicado.
       operationId: deleteArea
       parameters:
-        - name: id
-          in: query
-          required: true
-          schema:
-            type: integer
-            format: int64
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
       responses:
         "500":
           description: Internal Server Error
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "403":
-          description: Forbidden
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
-        "401":
-          description: Unauthorized
-        "404":
-          description: Not Found
-          content:
-            "*/*":
-              schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
         "409":
           description: Conflict
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/ErrorMessage"
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
         "200":
           description: OK
           content:
-            "*/*":
+            '*/*':
               schema:
-                $ref: "#/components/schemas/Area"
+                $ref: '#/components/schemas/Area'
+  /api/sensores/tipos/{id}:
+    delete:
+      tags:
+      - Sensores
+      summary: Elimina los sensores segun el tipo.
+      operationId: deleteSensorPorTipo
+      parameters:
+      - name: tipo
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: Conflict
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sensor'
 components:
   schemas:
     ErrorMessage:
@@ -462,6 +504,23 @@ components:
           type: string
         path:
           type: string
+    SensorContext:
+      required:
+      - areaId
+      - descripcion
+      - tipo
+      - unidadDeMedida
+      type: object
+      properties:
+        tipo:
+          type: string
+        unidadDeMedida:
+          type: string
+        descripcion:
+          type: string
+        areaId:
+          type: integer
+          format: int64
     Registro:
       type: object
       properties:
@@ -481,9 +540,9 @@ components:
           format: double
     Sensor:
       required:
-        - descripcion
-        - tipo
-        - unidadDeMedida
+      - descripcion
+      - tipo
+      - unidadDeMedida
       type: object
       properties:
         id:
@@ -498,12 +557,12 @@ components:
         registros:
           type: array
           items:
-            $ref: "#/components/schemas/Registro"
+            $ref: '#/components/schemas/Registro'
     Area:
       required:
-        - descripcion
-        - nombre
-        - piso
+      - descripcion
+      - nombre
+      - piso
       type: object
       properties:
         id:
@@ -519,4 +578,4 @@ components:
         sensores:
           type: array
           items:
-            $ref: "#/components/schemas/Sensor"
+            $ref: '#/components/schemas/Sensor'
