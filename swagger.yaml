@@ -91,6 +91,91 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/Sensor'
+  /api/registros:
+    get:
+      tags:
+      - Registros
+      summary: Devuelve una lista con todos los registros de los sensores.
+      operationId: getRegistros
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: Conflict
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Registro'
+    post:
+      tags:
+      - Registros
+      summary: Inserta un nuevo registro.
+      operationId: postRegistro
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegistroContext'
+        required: true
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: Conflict
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Registro'
   /api/areas:
     get:
       tags:
@@ -314,6 +399,97 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/Sensor'
+  /api/registros/ids/{id}:
+    get:
+      tags:
+      - Registros
+      summary: Devuelve el registro segun el ID indicado.
+      operationId: getRegistro
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: Conflict
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Registro'
+    delete:
+      tags:
+      - Registros
+      summary: Elimina el registro con el ID indicado.
+      operationId: deleteRegistro
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "409":
+          description: Conflict
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "403":
+          description: Forbidden
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorMessage'
+        "401":
+          description: Unauthorized
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Registro'
   /api/areas/puertas-abiertas:
     get:
       tags:
@@ -532,10 +708,10 @@ components:
           format: date-time
         unidad:
           type: string
-        frecuencia:
+        valor:
           type: number
           format: double
-        valor:
+        frecuencia:
           type: number
           format: double
     Sensor:
@@ -558,6 +734,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Registro'
+    RegistroContext:
+      required:
+      - fecha
+      - frecuencia
+      - sensorID
+      - unidad
+      - valor
+      type: object
+      properties:
+        fecha:
+          type: string
+          format: date-time
+        unidad:
+          type: string
+        frecuencia:
+          type: number
+          format: double
+        valor:
+          type: number
+          format: double
+        sensorID:
+          type: integer
+          format: int64
     Area:
       required:
       - descripcion
